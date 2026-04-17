@@ -16,7 +16,8 @@ class PolymerManager:
     2.
     """
 
-    residue_path: Path = Path("./residues/residues")
+    PROJECT_ROOT = Path(__file__).resolve().parent
+    RESIDUE_PATH: Path = Path(f"{PROJECT_ROOT}/residues/residues")
 
     def __init__(self, structure: pmd.Structure, resname: str | None = None) -> None:
         """
@@ -141,7 +142,7 @@ class PolymerManager:
 
     def _init_residues(self) -> dict[str, ResidueTemplate]:
         residue_templates = {}
-        for pdb_file in self.residue_path.iterdir():
+        for pdb_file in self.RESIDUE_PATH.iterdir():
             if pdb_file.suffix != ".pdb":
                 continue
             print("DEBUG: Residue loaded: ", pdb_file)
